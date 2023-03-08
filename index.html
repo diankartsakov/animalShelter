@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./styles/reset.css">
+    <title>Exam Dian</title>
+    <link rel="stylesheet" href="./styles/card.css">
+    <script src="./data.js"></script>
+    <script src="./models/animalManager.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        header {
+
+            display: flex;
+            justify-content: space-between;
+            height: 60px;
+            background-color: green;
+        }
+
+
+        #navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        #logoutDiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #logout {
+            display: none;
+            align-items: center;
+        }
+
+        #navigation>a,
+        #logout>a {
+            display: flex;
+            margin: 0 20px;
+            text-decoration: none;
+            color: yellowgreen;
+            padding: 10px;
+            border-radius: 20%;
+        }
+
+        #navigation>a:hover,
+        #logout>a:hover {
+            color: wheat;
+            border: 2px solid wheat;
+            background-color: yellowgreen;
+        }
+
+        body {
+            font-size: 20px;
+        }
+
+        .page {
+            min-height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #login {
+            background-color: rgb(156, 119, 190);
+        }
+
+        #register {
+            background-color: khaki;
+        }
+
+        #home {
+            background-color: rgb(243, 133, 93);
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            color: yellowgreen;
+            background-color: green;
+        }
+
+        .formTitle {
+            align-self: center;
+            color: green;
+            font-weight: 600;
+            padding: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid green;
+            background-color: yellowgreen;
+            padding: 10px;
+            border-radius: 10%;
+        }
+
+        #forgotPass {
+            text-decoration: none;
+            font-size: 13px;
+            margin: 2px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #loginError,
+        #usernameError,
+        #passError,
+        #confirmPassError {
+            font-size: 15px;
+            display: none;
+            background-color: red;
+            margin: 5px;
+            border: 2px solid green;
+            padding: 7px;
+        }
+
+        input {
+            margin: 2px;
+            padding: 5px;
+        }
+
+        #passBtn {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #passReq {
+            position: absolute;
+            display: none;
+            background-color: rgb(211, 11, 11);
+            margin: 5px;
+            padding: 10px;
+            border: 2px solid green;
+            border-radius: 10%;
+
+        }
+
+        #passReq p {
+            padding-bottom: 5px;
+        }
+
+        .submitBtn {
+            margin: 10px 0;
+            padding: 5px;
+        }
+
+        #passInfo:hover+#passReq {
+            display: block;
+        }
+
+        .container {
+            min-height: 300px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #home .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #adopted .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #adopted {
+            background: rgb(25, 35, 118);
+        }
+
+        #donate {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        #donateContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 50px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            width: 33%;
+            border: solid black 2px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <img src="./images/logo.png" width="50" height="50" alt="Logo">
+        <div id="navigation">
+            <a href="#login" id="loginNav">Login</a>
+            <a href="#register" id="registerNav">Register</a>
+            <a href="#home">Home</a>
+            <a href="#adopted">Adopted</a>
+        </div>
+        <div id="logoutDiv">
+            <div id="logout">
+                <a href="#logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="page" id="login">
+
+            <form id="loginForm">
+                <h2 class="formTitle">Login</h2>
+                <input name="username" type="text" placeholder="username" required>
+                <input name="password" type="password" placeholder="pass" required>
+                <a href="" id="forgotPass">Forgot password ?</a>
+                <input type="submit" value="Login" class="submitBtn" id="loginBtn" disabled="disabled">
+                <div id="loginError">Wrong Credentials</div>
+            </form>
+
+        </div>
+        <div class="page" id="register">
+            <form id="registerForm">
+                <h2 class="formTitle">Register Form</h2>
+                <input name="username" type="text" placeholder="Username" required>
+                <div id="usernameError"></div>
+                <input class="passField" name="password" type="password" placeholder="Password" required>
+                <div id="passError">Invalid password !</div>
+                <input class="passField" name="confirmPassword" type="password" placeholder="Confirm password" required>
+                <div id="confirmPassError">Passwords does not match !</div>
+                <div id="passBtn">
+                    <input type="button" id="showHidePass" value="Show password">
+                    <div>
+                        <input type="button" id="passInfo" value="i">
+                        <div id="passReq">
+                            <ul>
+                                <p>Password requirements:</p>
+                                <li>One small letter</li>
+                                <li>One capital letter</li>
+                                <li>One special character</li>
+                                <li>At least 6 character</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Register" name="submitReg" class="submitBtn" id="submitReg"
+                    disabled="disabled">
+            </form>
+        </div>
+        <div id="home">
+            <input type="text" name="" id="searchName">
+            <select name="" id="searchType">
+            </select>
+            <div class="container" id="homeContainer"></div>
+        </div>
+        <div id="adopted">
+            <div class="container" id="adoptedContainer"></div>
+        </div>
+        <div id="donate">
+            <div class="container" id="donateContainer">
+                <div>
+                    <span>How much do you want to donate for </span>
+                    <span id="animalName"></span>
+                </div>
+                <form id="donateForm">
+                    <input type="text" name="name" id="donaterName" placeholder="Your name" required>
+                    <input type="number" name="sum" id="donatedSum" placeholder="Sum" required>
+                    <input type="submit" name="donateBtn" id="donateBtn" value="DONATE">
+                </form>
+                <div>Donation history</div>
+                <table>
+                    <th>
+                        <tr>
+                            <td>Date</td>
+                            <td>Animal name</td>
+                            <td>Donated sum</td>
+                        </tr>
+                    </th>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+    </main>
+    <footer>
+        <p> &copy All rights reserved for Dido</p>
+    </footer>
+    <script src="./UserManager.js"></script>
+    <script src="./viewController.js"></script>
+</body>
+
+</html>

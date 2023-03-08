@@ -1,0 +1,51 @@
+.card {
+    display: grid;
+    width: 200px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid gainsboro;
+    grid-template-columns: repeat(2, 100px);
+    grid-template-rows: 6fr repeat(6, 1fr);
+
+    grid-template-areas: 
+    "a a"
+    "b b"
+    "c c"
+    "d d"
+    "e e"
+    "f f"
+    "g h";
+}
+
+.card img {
+    grid-area: a;
+}
+
+.card #cardName {
+    grid-area: b;
+}
+
+.card #cardFamily {
+    grid-area: c;
+}
+.card #cardBread {
+    grid-area: d;
+}
+
+.card #cardAge {
+    grid-area: e;
+}
+.card #neededSum {
+    grid-area: f;
+}
+.card #adoptDate {
+    grid-area: f;
+}
+
+.card #adoptBtn {
+    grid-area: g;
+}
+.card #donateBtn {
+    grid-area: h;
+}
+
